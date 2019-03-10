@@ -4,12 +4,20 @@ import org.gradle.api.GradleException
 import java.lang.ProcessBuilder.Redirect.PIPE
 import java.util.concurrent.TimeUnit
 
-class Atr(executable: String, configurationFile: String) {
+class Atr(
+    private val executable: String,
+    private val atrArguments: AtrArguments
+) {
 
-    val testProcessBuilder: ProcessBuilder = ProcessBuilder(executable, "test", "-l", configurationFile)
 
     fun runTests() {
-        val process = testProcessBuilder
+
+
+        val builder = ProcessBuilder(
+            executable, "test",
+            *atrArguments.all
+        )
+        val process = builder
             .redirectError(PIPE)
             .redirectOutput(PIPE)
             .start()

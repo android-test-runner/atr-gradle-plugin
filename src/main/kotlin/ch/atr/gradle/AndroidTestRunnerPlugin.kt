@@ -8,7 +8,7 @@ class AndroidTestRunnerPlugin : Plugin<Project> {
         val extension = project.extensions.create("atr", AndroidTestRunnerExtension::class.java)
 
         project.task("atr").doLast {
-            val atr = Atr(extension.executable, extension.configuration)
+            val atr = Atr(extension.executable, AtrArguments.fromExtenstion(extension))
             atr.runTests()
         }
     }
