@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
     id 'java-gradle-plugin'
+    id 'maven-publish'
 }
 
 group 'ch.android-test-runner'
@@ -10,13 +11,18 @@ version '0.1'
 sourceCompatibility = 1.8
 
 repositories {
+    maven {
+        url "https://dl.bintray.com/linkedin/maven/"
+    }
+    google()
     mavenCentral()
 }
 
 dependencies {
     compileOnly gradleApi()
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile 'com.linkedin.dextestparser:parser:2.0.1'
+    compile "com.android.tools.build:gradle:3.3.1"
+    compile "com.linkedin.dextestparser:parser:2.0.1"
     testCompileOnly gradleTestKit()
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
