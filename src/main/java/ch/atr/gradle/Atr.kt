@@ -1,7 +1,6 @@
 package ch.atr.gradle
 
 import org.gradle.api.GradleException
-import java.lang.ProcessBuilder.Redirect.INHERIT
 import java.lang.ProcessBuilder.Redirect.PIPE
 import java.util.concurrent.TimeUnit
 
