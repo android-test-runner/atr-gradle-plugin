@@ -5,8 +5,12 @@ import org.gradle.api.Project
 
 class AndroidTestRunnerPlugin : Plugin<Project> {
     override fun apply(project: Project) {
+        val extension = project.extensions.create("atr", AndroidTestRunnerExtension::class.java)
+
         project.task("atr").doLast {
-            println("Hello atr")
+
+            println("Configuration: atr ${extension.executable}, yanl ${extension.configuration}")
+
         }
     }
 
