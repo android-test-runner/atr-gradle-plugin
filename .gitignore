@@ -1,4 +1,5 @@
 .gradle
+build
 
 # Intellij IDEA
 .idea/**/workspace.xml
