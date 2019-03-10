@@ -16,6 +16,7 @@ repositories {
 dependencies {
     compileOnly gradleApi()
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'com.linkedin.dextestparser:parser:2.0.1'
     testCompileOnly gradleTestKit()
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
