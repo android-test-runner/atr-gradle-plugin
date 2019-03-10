@@ -15,8 +15,8 @@ class AtrArguments(
     companion object {
         fun fromExtenstion(extension: AndroidTestRunnerExtension): AtrArguments {
             return AtrArguments(
-                "test-apks/app-debug.apk",
-                "test-apks/app-debug-androidTest.apk",
+                extension.apk,
+                extension.testApk,
                 extension.devices,
                 arrayOf("GreetingTest#canGreet"),
                 extension.output,

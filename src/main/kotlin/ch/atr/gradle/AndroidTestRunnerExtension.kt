@@ -2,6 +2,8 @@ package ch.atr.gradle
 
 open class AndroidTestRunnerExtension(
     var executable: String = "",
+    var apk: String = "",
+    var testApk: String = "",
     var devices: Array<String> = emptyArray(),
     var output: String = "build/atr",
     var recordScreen: Boolean = true,
