@@ -17,12 +17,12 @@ class AndroidTestRunnerPlugin : Plugin<Project> {
 
         Variants(project).variants()?.all { variant ->
             variant.testVariant?.let { testVariant ->
-                createTestVariantTask(project, testVariant)
+                createAtrCollectTask(project, testVariant)
             }
         }
     }
 
-    private fun createTestVariantTask(project: Project, variant: ApkVariant) {
+    private fun createAtrCollectTask(project: Project, variant: ApkVariant) {
         project.tasks.create("atrCollect${variant.name.capitalize()}").apply {
             description = "Collects test names for '${variant.name}' variant from APK."
             group = "Verification"
@@ -32,7 +32,7 @@ class AndroidTestRunnerPlugin : Plugin<Project> {
     }
 
     private fun outputFile(project: Project, name: String): File {
-        val atrFolder = File(project.buildDir, "atr")
+        val atrFolder = File(project.buildDir, "outputs/atr")
         if (!atrFolder.exists()) {
             atrFolder.mkdir()
         }
