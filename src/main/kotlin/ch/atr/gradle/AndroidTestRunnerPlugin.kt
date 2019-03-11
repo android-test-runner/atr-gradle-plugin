@@ -1,6 +1,7 @@
 package ch.atr.gradle
 
 import com.android.build.gradle.api.ApkVariant
+import com.linkedin.dex.parser.DexParser
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import java.io.File
@@ -27,7 +28,10 @@ class AndroidTestRunnerPlugin : Plugin<Project> {
             description = "Collects test names for '${variant.name}' variant from APK."
             group = "Verification"
             dependsOn(variant.assembleProvider.get())
-            doLast { TestCollector(variant.apk(), outputFile(project, "allTests.txt")).collect() }
+            doLast {
+                val tests = DexParser.findTestNames(variant.apk().absolutePath)
+                TestCollector(tests, outputFile(project, "allTests.txt")).collect()
+            }
         }
     }
 
