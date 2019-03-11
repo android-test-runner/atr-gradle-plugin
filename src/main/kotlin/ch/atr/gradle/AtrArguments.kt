@@ -1,47 +1,24 @@
 package ch.atr.gradle
 
 class AtrArguments(
-    private val apk: String,
-    private val testApk: String,
-    private val devices: Array<String>,
-    private val tests: Array<String>,
-    private val output: String,
-    private val recordScreen: Boolean,
-    private val recordLogcat: Boolean,
-    private val recordJUnit: Boolean,
-    private val disableAnimations: Boolean,
-    private val verbose: Boolean
+    private val apkPath: String,
+    private val testApkPath: String,
+    private val testsPath: String,
+    private val extension: AndroidTestRunnerExtension
 ) {
-    companion object {
-        fun fromExtenstion(extension: AndroidTestRunnerExtension): AtrArguments {
-            return AtrArguments(
-                extension.apk,
-                extension.testApk,
-                extension.devices,
-                arrayOf("GreetingTest#canGreet"),
-                extension.output,
-                extension.recordScreen,
-                extension.recordLogcat,
-                extension.recordJunit,
-                extension.disableAnimations,
-                extension.verbose
-            )
-        }
-    }
-
     val all: Array<String>
         get() {
-            val apkArgument = arrayOf("--apk", apk)
-            val testApkArgument = arrayOf("--testapk", testApk)
-            val deviceArguments = devices.flatMap { listOf("--device", it) }.toTypedArray()
-            val testArguments = tests.flatMap { listOf("--test", it) }.toTypedArray()
-            val outputArgument = arrayOf("--output", output)
-            val recordScreenArgument = if (recordScreen) arrayOf("--recordscreen") else emptyArray()
-            val recordLogcatArgument = if (recordLogcat) arrayOf("--recordlogcat") else emptyArray()
-            val recordJUnitArgument = if (recordJUnit) arrayOf("--recordjunit") else emptyArray()
-            val disableAnimationsArgument = if (disableAnimations) arrayOf("--disableanimations") else emptyArray()
-            val verboseArgument = if (verbose) arrayOf("--verbose") else emptyArray()
+            val apkArgument = arrayOf("--apk", apkPath)
+            val testApkArgument = arrayOf("--testapk", testApkPath)
+            val testFileArgument = arrayOf("--testfile", testsPath)
+            val deviceArguments = extension.devices.flatMap { listOf("--device", it) }.toTypedArray()
+            val outputArgument = arrayOf("--output", extension.output)
+            val recordScreenArgument = if (extension.recordScreen) arrayOf("--recordscreen") else emptyArray()
+            val recordLogcatArgument = if (extension.recordLogcat) arrayOf("--recordlogcat") else emptyArray()
+            val recordJUnitArgument = if (extension.recordJUnit) arrayOf("--recordjunit") else emptyArray()
+            val disableAnimationsArgument = if (extension.disableAnimations) arrayOf("--disableanimations") else emptyArray()
+            val verboseArgument = if (extension.verbose) arrayOf("--verbose") else emptyArray()
 
-            return apkArgument + testApkArgument + deviceArguments + testArguments + outputArgument + recordScreenArgument + recordLogcatArgument + recordJUnitArgument + disableAnimationsArgument + verboseArgument
+            return apkArgument + testApkArgument + testFileArgument + deviceArguments + outputArgument + recordScreenArgument + recordLogcatArgument + recordJUnitArgument + disableAnimationsArgument + verboseArgument
         }
 }

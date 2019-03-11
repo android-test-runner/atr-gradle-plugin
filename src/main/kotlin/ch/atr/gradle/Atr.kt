@@ -8,11 +8,7 @@ class Atr(
     private val executable: String,
     private val atrArguments: AtrArguments
 ) {
-
-
     fun runTests() {
-
-
         val builder = ProcessBuilder(
             executable, "test",
             *atrArguments.all
@@ -26,7 +22,7 @@ class Atr(
         process.waitFor(30, TimeUnit.MINUTES)
         val exitValue = process.exitValue()
         if (exitValue != 0) {
-            throw GradleException("ATR exited with value ${exitValue}")
+            throw GradleException("ATR exited with value $exitValue")
         }
     }
 }
