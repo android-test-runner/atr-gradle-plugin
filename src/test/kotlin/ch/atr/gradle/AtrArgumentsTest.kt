@@ -1,7 +1,7 @@
 package ch.atr.gradle
 
 import org.hamcrest.CoreMatchers
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 
 internal class AtrArgumentsTest {
