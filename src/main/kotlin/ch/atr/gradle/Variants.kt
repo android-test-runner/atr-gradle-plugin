@@ -9,8 +9,11 @@ class Variants(private val project: Project) {
 
     fun variants(): DomainObjectSet<ApplicationVariant>? {
         return when {
-            project.plugins.hasPlugin("com.android.application") -> project.extensions.findByType(AppExtension::class.java)?.applicationVariants
+            hasAnroidPlugin() -> project.extensions.findByType(AppExtension::class.java)?.applicationVariants
             else -> throw IllegalStateException("The ATR Gradle plugin can only be used in Android application projects.")
         }
     }
+
+    private fun hasAnroidPlugin() =
+        project.plugins.hasPlugin("com.android.application") || project.plugins.hasPlugin("com.android.dynamic-feature")
 }
