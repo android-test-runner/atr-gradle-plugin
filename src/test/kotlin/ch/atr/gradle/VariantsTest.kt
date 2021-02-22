@@ -13,6 +13,14 @@ class VariantsTest {
         Variants(project).variants()
     }
 
+    @Test
+    fun returningVariantsDynamicSucceeds() {
+        val project = ProjectBuilder.builder().build()
+        project.plugins.apply("com.android.dynamic-feature")
+
+        Variants(project).variants()
+    }
+
     @Test(expected = IllegalStateException::class)
     fun returningVariantsThrowsException() {
         val project = ProjectBuilder.builder().build()
